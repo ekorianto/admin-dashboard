@@ -50,7 +50,7 @@ async function main() {
     { name: "Mega Putri", email: "mega@dashboard.com", position: "Staff HR", department: "SDM" },
   ];
 
-  const createdStaff = [];
+  const createdStaff: typeof admin[] = [];
   for (const staff of staffUsers) {
     const created = await prisma.user.upsert({
       where: { email: staff.email },
@@ -76,7 +76,7 @@ async function main() {
     { name: "Otomotif", description: "Spare part dan aksesoris kendaraan", slug: "otomotif" },
   ];
 
-  const categories = [];
+  const categories: Awaited<ReturnType<typeof prisma.category.create>>[] = [];
   for (const cat of categoryData) {
     const created = await prisma.category.upsert({
       where: { slug: cat.slug },
@@ -118,7 +118,7 @@ async function main() {
     { name: "Aki Kering 12V", sku: "OTM-004", price: 650000, costPrice: 500000, stock: 18, minStock: 5, maxStock: 40, unit: "pcs", categoryIndex: 5 },
   ];
 
-  const products = [];
+  const products: Awaited<ReturnType<typeof prisma.product.create>>[] = [];
   for (const prod of productData) {
     const { categoryIndex, ...productFields } = prod;
     const created = await prisma.product.upsert({
